@@ -13,6 +13,7 @@ import {
 const initialState = {
   currentUser: null,
   loading: false,
+  loadingSignup: false,
   error: false,
 }
 
@@ -63,15 +64,15 @@ export const userSlice = createSlice({
 
       // signup
       .addCase(signup.pending, (state) => {
-        state.loading = true
+        state.loadingSignup = true
       })
       .addCase(signup.fulfilled, (state, action) => {
-        state.loading = false
+        state.loadingSignup = false
         state.currentUser = action.payload
         state.error = false
       })
       .addCase(signup.rejected, (state, action) => {
-        state.loading = false
+        state.loadingSignup = false
         state.error = action.error.message
       })
 

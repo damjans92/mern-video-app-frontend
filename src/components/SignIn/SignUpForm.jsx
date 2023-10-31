@@ -34,7 +34,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('')
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [errors, setErrors] = useState({})
-  const { loading } = useSelector((state) => state.user)
+  const { loadingSignup } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
   const handleSignUp = async () => {
@@ -104,7 +104,7 @@ const SignUpForm = () => {
         </Link>
       </TermsLabel>
       {errors.acceptTerms && <Error text={errors.acceptTerms} />}
-      <Button onClick={handleSignUp} title='Sign up' disabled={loading} />
+      <Button onClick={handleSignUp} title='Sign up' disabled={loadingSignup} />
     </Form>
   )
 }

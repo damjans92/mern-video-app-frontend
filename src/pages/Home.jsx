@@ -76,7 +76,10 @@ const Home = ({ type }) => {
         <Card key={index} video={video} />
       ))}
       {loading && <Spinner />}
-      {isEnd && <EndText>No more videos to show</EndText>}
+      {videos.length > 0 && isEnd && <EndText>No more videos to show</EndText>}
+      {videos.length == 0 && (
+        <EndText>You haven&apos;t subscribed to a channel yet.</EndText>
+      )}
     </Container>
   )
 }
