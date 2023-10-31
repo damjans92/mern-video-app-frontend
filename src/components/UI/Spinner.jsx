@@ -19,7 +19,6 @@ const Loader = styled.span`
   position: relative;
   animation: ${rotate} 1s linear infinite;
   margin: 0 auto;
-  margin-top: 100px;
   &::before {
     content: '';
     box-sizing: border-box;
@@ -41,6 +40,10 @@ const Loader = styled.span`
   &::after {
     transform: rotate3d(90, 90, 0, 180deg);
     border-color: #ff3d00;
+  }
+  @media screen and (max-width: 768px) {
+    width: 50px;
+    height: 50px;
   }
 `
 

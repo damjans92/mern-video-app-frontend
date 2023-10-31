@@ -11,6 +11,11 @@ const Container = styled.div`
   gap: 16px;
   justify-content: flex-start;
 `
+const SpinnerContainer = styled.div`
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+`
 const EndText = styled.p`
   background-color: ${({ theme }) => theme.bgLighter};
   padding: 10px;
@@ -75,7 +80,11 @@ const Home = ({ type }) => {
       {videos.map((video, index) => (
         <Card key={index} video={video} />
       ))}
-      {loading && <Spinner />}
+      {loading && (
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      )}
       {videos.length > 0 && isEnd && <EndText>No more videos to show</EndText>}
       {!loading && videos.length == 0 && (
         <EndText>You haven&apos;t subscribed to a channel yet.</EndText>

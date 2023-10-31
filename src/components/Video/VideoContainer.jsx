@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import Spinner from '../UI/Spinner'
 
 const Container = styled.div`
   width: 100%;
@@ -21,18 +22,29 @@ const VideoPlaceholder = styled.div`
   display: flex;
   background-color: #575757;
   padding-top: 56.25%;
-  width: 100%;
   place-items: center;
   border-radius: 12px;
+  position: relative;
 `
-
+const SpinnerContainer = styled.div`
+  position: absolute;
+  display: flex;
+  place-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+`
 const VideoContainer = () => {
-  const { currentVideo, loading, error } = useSelector((state) => state.video)
+  const { currentVideo, loading } = useSelector((state) => state.video)
 
   if (loading) {
     return (
       <VideoPlaceholder>
-        <p>LOADING...</p>
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
       </VideoPlaceholder>
     )
   } else {
