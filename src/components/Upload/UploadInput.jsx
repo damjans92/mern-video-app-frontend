@@ -59,7 +59,7 @@ const UploadInput = ({ fileType, onChange }) => {
         </LabelUpload>
       </Container>
       {fileType === 'image' && <MaxSize>Max image size: 5MB</MaxSize>}
-      {fileType === 'video' && <MaxSize>Max video size: 500MB</MaxSize>}
+      {fileType === 'video' && <MaxSize>Max video size: 200MB</MaxSize>}
     </>
   )
 }

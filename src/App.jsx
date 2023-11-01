@@ -67,69 +67,6 @@ function App() {
                     }
                   />
                 ))}
-                {/* {routes.map((route, index) => (
-                  <Route key={index} path={route.path}>
-                    {route.protected ? (
-                      <RequireAuth redirectTo='/signin'>
-                        {route.element}
-                      </RequireAuth>
-                    ) : (
-                      route.element
-                    )}
-                  </Route>
-                ))} */}
-                {/* <Route path='/'>
-                  <Route index element={<Home type='random' />} />
-                  <Route path='trends' element={<Home type='trend' />} />
-                  <Route
-                    path='/subscriptions'
-                    element={
-                      <RequireAuth redirectTo='/signin'>
-                        <Home type='sub' />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route path='search' element={<Search />} />
-                  <Route path='signin' element={<SignIn />} />
-                  <Route
-                    path='uservideos'
-                    element={
-                      <RequireAuth redirectTo='/signin'>
-                        <MyVideos />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path='account'
-                    element={
-                      <RequireAuth redirectTo='/signin'>
-                        <Account />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path='channel/:id'
-                    element={
-                      <RequireAuth redirectTo='/signin'>
-                        <UserChannel />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route
-                    path='liked-videos'
-                    element={
-                      <RequireAuth redirectTo='/signin'>
-                        <LikedVideos />
-                      </RequireAuth>
-                    }
-                  />
-                  <Route path='video/:id' element={<Video />} />
-                </Route>
-                <Route
-                  path='terms-and-conditions'
-                  element={<TermsAndConditions />}
-                />
-                <Route path='*' element={<NotFoundPage />} /> */}
               </Routes>
             </Wrapper>
           </Main>

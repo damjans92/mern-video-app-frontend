@@ -48,7 +48,7 @@ const Home = ({ type }) => {
     setLoading(true)
     try {
       const res = await axiosInstance.get(
-        `videos/${type}?skip=${skip}&limit=5`,
+        `videos/${type}?skip=${skip}&limit=12`,
         {
           withCredentials: true,
         }

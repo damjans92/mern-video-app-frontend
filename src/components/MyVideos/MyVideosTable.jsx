@@ -40,7 +40,7 @@ const Title = styled.h3`
 `
 const TableContainer = styled.div`
   max-height: 600px;
-  overflow-y: scroll;
+  overflow-y: auto;
 `
 const Table = styled.table`
   color: ${({ theme }) => theme.text};
