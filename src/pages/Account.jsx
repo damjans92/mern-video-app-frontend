@@ -30,6 +30,9 @@ const AccountWrap = styled.div`
   border-radius: 12px;
   background-color: ${({ theme }) => theme.bgLighter};
   border: 1px solid ${({ theme }) => theme.border};
+  @media screen and (max-width: 640px) {
+    width: 100%;
+  }
 `
 const AccountInfo = styled.div`
   display: flex;

@@ -40,6 +40,9 @@ const Wrapper = styled.div`
   gap: 20px;
   position: relative;
   overflow-y: auto;
+  @media screen and (max-width: 640px) {
+    top: 100px;
+  }
 `
 const Close = styled.div`
   right: 10px;
