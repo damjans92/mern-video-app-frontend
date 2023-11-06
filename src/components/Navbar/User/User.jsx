@@ -13,7 +13,7 @@ const Container = styled.div`
   position: relative;
 `
 
-const User = ({ setOpen }) => {
+const User = () => {
   const dispatch = useDispatch()
 
   return (

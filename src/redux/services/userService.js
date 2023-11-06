@@ -160,12 +160,11 @@ export const subscribe = createAsyncThunk(
       const isSubscribed = currentUser.subscribedUsers.includes(channelId)
       await axiosInstance.put(
         isSubscribed ? unsubUrl : subUrl,
+        {},
         {
           headers: {
             'Content-Type': 'application/json',
           },
-        },
-        {
           withCredentials: true,
         }
       )

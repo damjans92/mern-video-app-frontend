@@ -70,6 +70,7 @@ const UploadForm = ({ setOpen }) => {
   })
   const [tags, setTags] = useState([])
   const [errors, setErrors] = useState({})
+  const [loading, setLoading] = useState(false)
   const maxChars = 1000
 
   const navigate = useNavigate()
@@ -111,6 +112,7 @@ const UploadForm = ({ setOpen }) => {
     e.preventDefault()
 
     if (validateUploadForm(inputs, setErrors)) {
+      setLoading(true)
       try {
         const obj = {
           ...inputs,
@@ -128,10 +130,11 @@ const UploadForm = ({ setOpen }) => {
           }
         )
         res.status === 200 && navigate(`/video/${res.data._id}`)
-
+        setLoading(false)
         setOpen(false)
         toast.success('Video uploaded successfully!')
       } catch (error) {
+        setLoading(false)
         toast.error('Error while uploading video')
       }
     }
@@ -213,7 +216,7 @@ const UploadForm = ({ setOpen }) => {
           />
         </VisibilityWrapper>
       </Label>
-      <Button type='submit' title='Upload' fontSize='16px' />
+      <Button type='submit' title='Upload' fontSize='16px' disabled={loading} />
     </Form>
   )
 }

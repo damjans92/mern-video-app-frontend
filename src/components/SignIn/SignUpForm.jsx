@@ -98,10 +98,7 @@ const SignUpForm = () => {
           checked={acceptTerms}
           onChange={() => setAcceptTerms(!acceptTerms)}
         />
-        I accept{' '}
-        <Link to='/terms-and-conditions' target='_blank'>
-          terms and conditions
-        </Link>
+        I accept <Link to='/terms-and-conditions'>terms and conditions</Link>
       </TermsLabel>
       {errors.acceptTerms && <Error text={errors.acceptTerms} />}
       <Button onClick={handleSignUp} title='Sign up' disabled={loadingSignup} />
