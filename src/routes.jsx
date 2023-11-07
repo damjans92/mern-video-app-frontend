@@ -27,7 +27,7 @@ export const NOT_FOUND = '*'
 export const routes = [
   {
     path: HOME,
-    element: <Home type='random' />,
+    element: <Home type='sorted' />,
     protected: false,
   },
   {
