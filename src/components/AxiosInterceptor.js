@@ -12,10 +12,14 @@ const AxiosInterceptor = () => {
   axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-      const { status } = error.response
-      if (status === UNAUTHORIZED) {
-        // dispatch(logout({ navigate }))
-        toast.info('Your session has expired. Sign in again.')
+      if (error.response) {
+        const { status } = error.response
+        if (status === UNAUTHORIZED) {
+          dispatch(logout({ navigate }))
+          toast.info('Your session has expired. Sign in again.')
+        }
+      } else {
+        toast.error('An error occurred. Please try again later.')
       }
       return Promise.reject(error)
     }
