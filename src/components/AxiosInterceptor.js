@@ -14,7 +14,7 @@ const AxiosInterceptor = () => {
     (error) => {
       const { status } = error.response
       if (status === UNAUTHORIZED) {
-        dispatch(logout({ navigate }))
+        // dispatch(logout({ navigate }))
         toast.info('Your session has expired. Sign in again.')
       }
       return Promise.reject(error)
