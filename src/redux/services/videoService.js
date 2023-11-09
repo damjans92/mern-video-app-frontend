@@ -102,12 +102,11 @@ export const dislike = createAsyncThunk(
     try {
       await axiosInstance.put(
         `users/dislike/${currentVideoId}`,
+        {},
         {
           headers: {
             'Content-Type': 'application/json',
           },
-        },
-        {
           withCredentials: true,
         }
       )
