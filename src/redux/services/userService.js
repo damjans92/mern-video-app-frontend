@@ -23,7 +23,7 @@ export const signin = createAsyncThunk(
           name,
           password,
         },
-        { withCredentials: true, credentials: 'include' }
+        { withCredentials: true }
       )
 
       if (res.status === 200) {
