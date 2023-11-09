@@ -79,12 +79,11 @@ export const like = createAsyncThunk(
     try {
       await axiosInstance.put(
         `users/like/${currentVideoId}`,
+        {},
         {
           headers: {
             'Content-Type': 'application/json',
           },
-        },
-        {
           withCredentials: true,
         }
       )
