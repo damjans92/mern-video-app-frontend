@@ -81,6 +81,7 @@ export const userSlice = createSlice({
         state.loading = true
       })
       .addCase(subscribe.fulfilled, (state, action) => {
+        state.loading = false
         const subscribedToArr = state.currentUser.subscribedUsers
 
         if (subscribedToArr.includes(action.payload)) {

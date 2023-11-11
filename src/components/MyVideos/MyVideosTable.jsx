@@ -130,7 +130,7 @@ const MyVideosTable = () => {
 
   useEffect(() => {
     dispatch(fetchMyVideos())
-  }, [])
+  }, [dispatch])
 
   if (loading && videoList.length > 0) {
     return <Spinner />
