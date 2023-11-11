@@ -218,6 +218,7 @@ export const updateUser = createAsyncThunk(
 
       return res.data
     } catch (err) {
+      toast.error('Error: ', err.messages)
       return rejectWithValue(err.message)
     }
   }
