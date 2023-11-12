@@ -123,12 +123,10 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
           placeholder='Re-enter new password'
           value={updatedPassword.confirmPassword}
           onChange={(e) =>
-            setUpdatePassword((e) =>
-              setUpdatePassword((prev) => ({
-                ...prev,
-                confirmPassword: e.target.value,
-              }))
-            )
+            setUpdatePassword((prev) => ({
+              ...prev,
+              confirmPassword: e.target.value,
+            }))
           }
         />
       </Label>
