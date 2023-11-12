@@ -1,11 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
 import Error from '../UI/Error'
 import axiosInstance from '../../api'
 import { toast } from 'react-toastify'
-import { updatePassword } from 'firebase/auth'
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  updatePassword,
+} from 'firebase/auth'
 import { auth } from '../../firebase'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/services/userService'
@@ -25,6 +29,7 @@ const Label = styled.label`
   gap: 10px;
 `
 const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
+  const [currentPassword, setCurrentPassword] = useState('')
   const [errors, setErrors] = useState({})
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -37,6 +42,15 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
     } else {
       try {
         const newPassword = updatedPassword.password
+
+        // Reauthenticate the user before changing the password
+        const user = auth.currentUser
+        const credential = EmailAuthProvider.credential(
+          user.email,
+          currentPassword
+        )
+
+        await reauthenticateWithCredential(user, credential)
 
         await updatePassword(auth.currentUser, newPassword)
 
@@ -78,7 +92,15 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
   return (
     <Form onSubmit={handleEditPassword}>
       <Title>Change password</Title>
-
+      <Label>
+        Current password
+        <Input
+          type='password'
+          placeholder='Enter current password'
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+        />
+      </Label>
       <Label>
         New password
         <Input
@@ -100,12 +122,7 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
           type='password'
           placeholder='Re-enter new password'
           value={updatedPassword.confirmPassword}
-          onChange={(e) =>
-            setUpdatePassword((prev) => ({
-              ...prev,
-              confirmPassword: e.target.value,
-            }))
-          }
+          onChange={(e) => setUpdatePassword(e.target.value)}
         />
       </Label>
       {errors.confirmPassword && <Error text={errors.confirmPassword} />}
