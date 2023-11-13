@@ -198,18 +198,6 @@ export const updateUser = createAsyncThunk(
         ? updateData.currentPassword
         : null
 
-      // const auth = getAuth()
-
-      // // Reauthenticate the user before updating sensitive information
-      // const reauthenticate = async () => {
-      //   const credential = EmailAuthProvider.credential(
-      //     currentUser.email,
-      //     currentPassword
-      //   )
-
-      //   return reauthenticateWithCredential(currentUser, credential)
-      // }
-
       // Update firebase email or profile
       if (newEmail !== existingEmail) {
         promises.push(
@@ -223,14 +211,6 @@ export const updateUser = createAsyncThunk(
       }
 
       await Promise.all(promises)
-
-      // await Promise.all(promises)
-      //   .then(() => {
-      //     // toast.success('All upodates completed')
-      //   })
-      //   .catch((error) => {
-      //     toast.error(error.message)
-      //   })
 
       const res = await axiosInstance.put(
         `users/${currentUser._id}`,
