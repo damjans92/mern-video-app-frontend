@@ -78,14 +78,12 @@ export const updateFirebaseProfile = async (newName) => {
 }
 
 // Update password
-export const reauthenticate = async (currentPassword, newPassword) => {
+export const reauthenticate = async (currentPassword) => {
   try {
     const user = auth.currentUser
     const credential = EmailAuthProvider.credential(user.email, currentPassword)
 
     await reauthenticateWithCredential(user, credential)
-
-    await updatePassword(auth.currentUser, newPassword)
   } catch (error) {
     throw error
   }

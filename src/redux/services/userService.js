@@ -1,7 +1,12 @@
 import { toast } from 'react-toastify'
 import axiosInstance from '../../api'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { signInWithPopup } from 'firebase/auth'
+import {
+  EmailAuthProvider,
+  getAuth,
+  reauthenticateWithCredential,
+  signInWithPopup,
+} from 'firebase/auth'
 import { auth, provider } from '../../firebase'
 import {
   deleteFirebaseUser,
@@ -186,6 +191,19 @@ export const updateUser = createAsyncThunk(
       const newEmail = updateData.updatedEmail
       const existingName = currentUser.name
       const newName = updateData.updatedUsername
+      // const currentPassword = updateData.currentPassword // Assuming you have a field for the current password
+
+      // const auth = getAuth()
+
+      // // Reauthenticate the user before updating sensitive information
+      // const reauthenticate = async () => {
+      //   const credential = EmailAuthProvider.credential(
+      //     currentUser.email,
+      //     currentPassword
+      //   )
+
+      //   return reauthenticateWithCredential(currentUser, credential)
+      // }
 
       // Update firebase email or profile
       if (newEmail !== existingEmail) {
