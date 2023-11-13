@@ -3,18 +3,9 @@ import styled from 'styled-components'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
 import Error from '../UI/Error'
-import axiosInstance from '../../api'
-import { toast } from 'react-toastify'
-import {
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-  updatePassword,
-} from 'firebase/auth'
-import { auth } from '../../firebase'
 import { useDispatch } from 'react-redux'
-import { logout, updateUser } from '../../redux/services/userService'
+import { updateUser } from '../../redux/services/userService'
 import { useNavigate } from 'react-router-dom'
-import { reauthenticate } from '../../firebase/firebaseAuth'
 
 const Form = styled.form`
   display: flex;
@@ -51,19 +42,16 @@ const EmailChangeForm = ({ currentUser }) => {
       )
     }
   }
-  useEffect(() => {
-    console.log(updatedEmail)
-    console.log(currentPassword)
-  }, [updatedEmail, currentPassword])
+
   const validateUpdateEmail = () => {
-    const errorsArr = {}
+    const errorsObj = {}
     if (!currentPassword.trim())
-      errorsArr.password = 'Password field is required'
-    if (!updatedEmail.trim()) errorsArr.email = 'Email field is required'
+      errorsObj.password = 'Password field is required'
+    if (!updatedEmail.trim()) errorsObj.email = 'Email field is required'
 
-    setErrors(errorsArr)
+    setErrors(errorsObj)
 
-    if (Object.keys(errorsArr).length === 0) {
+    if (Object.keys(errorsObj).length === 0) {
       return true
     } else {
       return false

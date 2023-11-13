@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
 import Error from '../UI/Error'
 import axiosInstance from '../../api'
 import { toast } from 'react-toastify'
-import {
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-  updatePassword,
-} from 'firebase/auth'
+import { updatePassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/services/userService'
@@ -65,17 +61,17 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
   }
 
   const validateResetPassword = () => {
-    const errorsArr = {}
+    const errorObj = {}
     if (!updatedPassword.password.trim())
-      errorsArr.password = 'Password field is required'
+      errorObj.password = 'Password field is required'
     if (!updatedPassword.confirmPassword.trim())
-      errorsArr.confirmPassword = 'Confirm password field is required'
+      errorObj.confirmPassword = 'Confirm password field is required'
     if (updatedPassword.password !== updatedPassword.confirmPassword) {
-      errorsArr.mustMatch = 'Passwords must match!'
+      errorObj.mustMatch = 'Passwords must match!'
     }
-    setErrors(errorsArr)
+    setErrors(errorObj)
 
-    if (Object.keys(errorsArr).length === 0) {
+    if (Object.keys(errorObj).length === 0) {
       return true
     } else {
       return false

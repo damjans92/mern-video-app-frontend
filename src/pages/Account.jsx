@@ -6,9 +6,10 @@ import Input from '../components/UI/Input'
 import Button from '../components/UI/Button'
 import PasswordChangeForm from '../components/Account/PasswordChangeForm'
 import ProfileImage from '../components/Account/ProfileImage'
-import { deleteAccount, updateUser } from '../redux/services/userService'
+import { updateUser } from '../redux/services/userService'
 import { useNavigate } from 'react-router-dom'
 import EmailChangeForm from '../components/Account/EmailChangeForm'
+import DeleteAccountForm from '../components/Account/DeleteAccountForm'
 
 const Container = styled.div`
   display: flex;
@@ -116,7 +117,6 @@ const Account = () => {
   const [open, setOpen] = useState(false)
   const [modalType, setModalType] = useState(null)
   const [updatedUsername, setUpdateUsername] = useState(currentUser.name)
-  // const [updatedEmail, setUpdatedEmail] = useState(currentUser.email)
   const [updatedDesc, setUpdateDesc] = useState(currentUser.desc)
   const [updatedPassword, setUpdatePassword] = useState({
     password: '',
@@ -144,11 +144,7 @@ const Account = () => {
       })
     )
   }
-  const handleDeleteAccount = async () => {
-    dispatch(
-      deleteAccount({ currentUserId: currentUser._id, dispatch, navigate })
-    )
-  }
+
   return (
     <Container>
       <Wrapper>
@@ -178,14 +174,6 @@ const Account = () => {
                 </MaxChars>
               </DescWrap>
 
-              {/* <Label>Email</Label>
-
-              <Input
-                type='text'
-                placeholder='Email'
-                value={updatedEmail}
-                onChange={(e) => setUpdatedEmail(e.target.value)}
-              /> */}
               <ButtonChange
                 onClick={() => openModalHandler('emailModal')}
                 type='button'
@@ -220,13 +208,7 @@ const Account = () => {
             />
           )}
           {modalType === 'deleteAccountModal' && (
-            <DeleteAccount>
-              Do you want to delete your account permanently?
-              <ButtonWrap>
-                <Button title='Delete' onClick={handleDeleteAccount} />
-                <Button title='Cancel' onClick={() => setOpen(false)} />
-              </ButtonWrap>
-            </DeleteAccount>
+            <DeleteAccountForm setOpen={setOpen} />
           )}
         </Modal>
       </Wrapper>

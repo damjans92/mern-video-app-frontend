@@ -133,7 +133,10 @@ export const signup = createAsyncThunk(
 // delete user account
 export const deleteAccount = createAsyncThunk(
   'userSlice/deleteAccount',
-  async ({ currentUserId, dispatch, navigate }, { rejectWithValue }) => {
+  async (
+    { currentUserId, currentPassword, dispatch, navigate },
+    { rejectWithValue }
+  ) => {
     try {
       const mernResponse = await axiosInstance.delete(
         `users/${currentUserId}`,
@@ -143,6 +146,7 @@ export const deleteAccount = createAsyncThunk(
       )
       if (mernResponse.status === 200) {
         // After deletion from database delete from firebase
+        await reauthenticate(currentPassword)
         await deleteFirebaseUser()
 
         dispatch(logout({ navigate }))
