@@ -222,7 +222,7 @@ export const updateUser = createAsyncThunk(
         promises.push(updateFirebaseProfile(newName))
       }
 
-      Promise.all(promises)
+      await Promise.all(promises)
         .then(() => {
           // toast.success('All upodates completed')
         })
