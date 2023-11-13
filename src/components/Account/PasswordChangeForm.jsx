@@ -44,7 +44,7 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
       try {
         const newPassword = updatedPassword.password
 
-        await reauthenticate(currentPassword, newPassword)
+        await reauthenticate(currentPassword)
         await updatePassword(auth.currentUser, newPassword)
 
         const res = await axiosInstance.put(

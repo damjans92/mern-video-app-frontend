@@ -8,6 +8,7 @@ import PasswordChangeForm from '../components/Account/PasswordChangeForm'
 import ProfileImage from '../components/Account/ProfileImage'
 import { deleteAccount, updateUser } from '../redux/services/userService'
 import { useNavigate } from 'react-router-dom'
+import EmailChangeForm from '../components/Account/EmailChangeForm'
 
 const Container = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ const Edit = styled.div`
   align-items: center;
   color: white;
 `
-const ButtonPassword = styled.button`
+const ButtonChange = styled.button`
   text-transform: uppercase;
   background-color: transparent;
   border: none;
@@ -62,7 +63,7 @@ const ButtonPassword = styled.button`
   margin-left: auto;
   cursor: pointer;
 `
-const ButtonDelete = styled(ButtonPassword)`
+const ButtonDelete = styled(ButtonChange)`
   color: red;
 `
 const DescWrap = styled.div`
@@ -139,7 +140,7 @@ const Account = () => {
     dispatch(
       updateUser({
         currentUser,
-        updateData: { updatedUsername, updatedEmail, updatedDesc },
+        updateData: { updatedUsername, updatedDesc },
       })
     )
   }
@@ -177,20 +178,26 @@ const Account = () => {
                 </MaxChars>
               </DescWrap>
 
-              <Label>Email</Label>
+              {/* <Label>Email</Label>
 
               <Input
                 type='text'
                 placeholder='Email'
                 value={updatedEmail}
                 onChange={(e) => setUpdatedEmail(e.target.value)}
-              />
-              <ButtonPassword
+              /> */}
+              <ButtonChange
+                onClick={() => openModalHandler('emailModal')}
+                type='button'
+              >
+                Change email
+              </ButtonChange>
+              <ButtonChange
                 onClick={() => openModalHandler('passwordModal')}
                 type='button'
               >
                 Change password
-              </ButtonPassword>
+              </ButtonChange>
               <ButtonDelete
                 onClick={() => openModalHandler('deleteAccountModal')}
                 type='button'
@@ -202,6 +209,13 @@ const Account = () => {
           </AccountInfo>
         </AccountWrap>
         <Modal open={open} onClose={() => setOpen(false)}>
+          {modalType === 'emailModal' && (
+            <EmailChangeForm
+              currentUser={currentUser}
+              setUpdatedEmail={setUpdatedEmail}
+              errors={errors}
+            />
+          )}
           {modalType === 'passwordModal' && (
             <PasswordChangeForm
               updatedPassword={updatedPassword}

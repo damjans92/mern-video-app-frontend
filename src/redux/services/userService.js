@@ -10,6 +10,7 @@ import {
 import { auth, provider } from '../../firebase'
 import {
   deleteFirebaseUser,
+  reauthenticate,
   signInWithFirebase,
   signOutWithFirebase,
   signUpWithFirebase,
@@ -189,9 +190,13 @@ export const updateUser = createAsyncThunk(
       const promises = []
       const existingEmail = currentUser.email
       const newEmail = updateData.updatedEmail
+        ? updateData.updatedEmail
+        : existingEmail
       const existingName = currentUser.name
       const newName = updateData.updatedUsername
-      // const currentPassword = updateData.currentPassword // Assuming you have a field for the current password
+      const currentPassword = updateData.currentPassword
+        ? updateData.currentPassword
+        : null
 
       // const auth = getAuth()
 
@@ -207,7 +212,11 @@ export const updateUser = createAsyncThunk(
 
       // Update firebase email or profile
       if (newEmail !== existingEmail) {
-        promises.push(updateFirebaseEmail(newEmail))
+        promises.push(
+          reauthenticate(currentPassword).then(() =>
+            updateFirebaseEmail(newEmail)
+          )
+        )
       }
       if (newName !== existingName) {
         promises.push(updateFirebaseProfile(newName))
