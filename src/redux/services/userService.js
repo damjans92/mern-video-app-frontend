@@ -223,12 +223,14 @@ export const updateUser = createAsyncThunk(
       }
 
       await Promise.all(promises)
-        .then(() => {
-          // toast.success('All upodates completed')
-        })
-        .catch((error) => {
-          toast.error(error.message)
-        })
+
+      // await Promise.all(promises)
+      //   .then(() => {
+      //     // toast.success('All upodates completed')
+      //   })
+      //   .catch((error) => {
+      //     toast.error(error.message)
+      //   })
 
       const res = await axiosInstance.put(
         `users/${currentUser._id}`,
