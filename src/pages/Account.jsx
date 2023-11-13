@@ -116,7 +116,7 @@ const Account = () => {
   const [open, setOpen] = useState(false)
   const [modalType, setModalType] = useState(null)
   const [updatedUsername, setUpdateUsername] = useState(currentUser.name)
-  const [updatedEmail, setUpdatedEmail] = useState(currentUser.email)
+  // const [updatedEmail, setUpdatedEmail] = useState(currentUser.email)
   const [updatedDesc, setUpdateDesc] = useState(currentUser.desc)
   const [updatedPassword, setUpdatePassword] = useState({
     password: '',
@@ -210,11 +210,7 @@ const Account = () => {
         </AccountWrap>
         <Modal open={open} onClose={() => setOpen(false)}>
           {modalType === 'emailModal' && (
-            <EmailChangeForm
-              currentUser={currentUser}
-              setUpdatedEmail={setUpdatedEmail}
-              errors={errors}
-            />
+            <EmailChangeForm currentUser={currentUser} errors={errors} />
           )}
           {modalType === 'passwordModal' && (
             <PasswordChangeForm

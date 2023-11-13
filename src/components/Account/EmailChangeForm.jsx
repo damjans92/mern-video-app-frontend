@@ -29,18 +29,20 @@ const Label = styled.label`
   flex-direction: column;
   gap: 10px;
 `
-const EmailChangeForm = ({ currentUser, updatedEmail, setUpdatedEmail }) => {
+const EmailChangeForm = ({ currentUser }) => {
   const [currentPassword, setCurrentPassword] = useState('')
+  const [updatedEmail, setUpdatedEmail] = useState(currentUser.email)
   const [errors, setErrors] = useState({})
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleEditPassword = async (e) => {
+  const handleEditEmail = async (e) => {
     e.preventDefault()
 
     if (!validateUpdateEmail()) {
       return
     } else {
+      console.log(updatedEmail, currentPassword)
       dispatch(
         updateUser({
           currentUser,
@@ -49,7 +51,10 @@ const EmailChangeForm = ({ currentUser, updatedEmail, setUpdatedEmail }) => {
       )
     }
   }
-
+  useEffect(() => {
+    console.log(updatedEmail)
+    console.log(currentPassword)
+  }, [updatedEmail, currentPassword])
   const validateUpdateEmail = () => {
     const errorsArr = {}
     if (!currentPassword.trim())
@@ -66,7 +71,7 @@ const EmailChangeForm = ({ currentUser, updatedEmail, setUpdatedEmail }) => {
   }
 
   return (
-    <Form onSubmit={handleEditPassword}>
+    <Form onSubmit={handleEditEmail}>
       <Title>Change password</Title>
       <Label>
         Current password
