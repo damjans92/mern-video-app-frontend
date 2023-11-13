@@ -1,9 +1,12 @@
 import {
+  EmailAuthProvider,
   createUserWithEmailAndPassword,
   deleteUser,
+  reauthenticateWithCredential,
   signInWithEmailAndPassword,
   signOut,
   updateEmail,
+  updatePassword,
   updateProfile,
 } from 'firebase/auth'
 import { auth } from '../firebase'
@@ -69,6 +72,20 @@ export const updateFirebaseProfile = async (newName) => {
     await updateProfile(auth.currentUser, {
       displayName: newName,
     })
+  } catch (error) {
+    throw error
+  }
+}
+
+// Update password
+export const reauthenticate = async (currentPassword, newPassword) => {
+  try {
+    const user = auth.currentUser
+    const credential = EmailAuthProvider.credential(user.email, currentPassword)
+
+    await reauthenticateWithCredential(user, credential)
+
+    await updatePassword(auth.currentUser, newPassword)
   } catch (error) {
     throw error
   }

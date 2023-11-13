@@ -14,6 +14,7 @@ import { auth } from '../../firebase'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/services/userService'
 import { useNavigate } from 'react-router-dom'
+import { reauthenticate } from '../../firebase/firebaseAuth'
 
 const Form = styled.form`
   display: flex;
@@ -43,15 +44,7 @@ const PasswordChangeForm = ({ updatedPassword, setUpdatePassword }) => {
       try {
         const newPassword = updatedPassword.password
 
-        // Reauthenticate the user before changing the password
-        const user = auth.currentUser
-        const credential = EmailAuthProvider.credential(
-          user.email,
-          currentPassword
-        )
-
-        await reauthenticateWithCredential(user, credential)
-
+        await reauthenticate(currentPassword, newPassword)
         await updatePassword(auth.currentUser, newPassword)
 
         const res = await axiosInstance.put(
