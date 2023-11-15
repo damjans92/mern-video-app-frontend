@@ -5,7 +5,7 @@ import { deleteFile } from '../../firebase/firebaseStorage'
 
 export const fetchMyVideos = createAsyncThunk(
   'videoSlice/fetchMyVideos',
-  async (_, { rejectWithValue }) => {
+  async (_) => {
     try {
       const res = await axiosInstance.get('videos/findmyvideos', {
         withCredentials: true,
@@ -13,14 +13,14 @@ export const fetchMyVideos = createAsyncThunk(
 
       return res.data
     } catch (error) {
-      return rejectWithValue(error.message)
+      toast.error('Error fetching user videos')
     }
   }
 )
 
 export const editVideo = createAsyncThunk(
   'videoSlice/editVideo',
-  async ({ inputs, tags, editVideoData }, { rejectWithValue }) => {
+  async ({ inputs, tags, editVideoData }) => {
     try {
       const res = await axiosInstance.put(
         `videos/${editVideoData._id}`,
@@ -44,7 +44,7 @@ export const editVideo = createAsyncThunk(
 // delete a video
 export const deleteVideo = createAsyncThunk(
   'videoSlice/deleteVideo',
-  async ({ videoId, imgUrl, videoUrl }, { rejectWithValue }) => {
+  async ({ videoId, imgUrl, videoUrl }) => {
     try {
       console.log('delete service')
       const videoFileUrl = videoUrl
@@ -67,7 +67,7 @@ export const deleteVideo = createAsyncThunk(
         })
       return videoId
     } catch (error) {
-      return rejectWithValue(error.message)
+      toast.error('Error while deleting the video')
     }
   }
 )
@@ -75,7 +75,7 @@ export const deleteVideo = createAsyncThunk(
 // like a video
 export const like = createAsyncThunk(
   'videoSlice/like',
-  async ({ currentUserId, currentVideoId }, { rejectWithValue }) => {
+  async ({ currentUserId, currentVideoId }) => {
     try {
       await axiosInstance.put(
         `users/like/${currentVideoId}`,
@@ -89,8 +89,7 @@ export const like = createAsyncThunk(
       )
       return currentUserId
     } catch (error) {
-      toast.error(error.message)
-      return rejectWithValue(error.message)
+      toast.error('Error when liking a video')
     }
   }
 )
@@ -98,7 +97,7 @@ export const like = createAsyncThunk(
 // dislike a video
 export const dislike = createAsyncThunk(
   'videoSlice/dislike',
-  async ({ currentUserId, currentVideoId }, { rejectWithValue }) => {
+  async ({ currentUserId, currentVideoId }) => {
     try {
       await axiosInstance.put(
         `users/dislike/${currentVideoId}`,
@@ -112,8 +111,7 @@ export const dislike = createAsyncThunk(
       )
       return currentUserId
     } catch (error) {
-      toast.error(error.message)
-      return rejectWithValue(error.message)
+      toast.error('Error when disliking a video')
     }
   }
 )

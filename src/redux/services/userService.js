@@ -1,12 +1,7 @@
 import { toast } from 'react-toastify'
 import axiosInstance from '../../api'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {
-  EmailAuthProvider,
-  getAuth,
-  reauthenticateWithCredential,
-  signInWithPopup,
-} from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from '../../firebase'
 import {
   deleteFirebaseUser,
@@ -21,7 +16,7 @@ import {
 // sign in
 export const signin = createAsyncThunk(
   'userSlice/signin',
-  async ({ name, password }, { rejectWithValue }) => {
+  async ({ name, password }) => {
     try {
       const res = await axiosInstance.post(
         'auth/signin',
@@ -47,7 +42,7 @@ export const signin = createAsyncThunk(
         toast.error('You entered wrong credentials!')
       }
 
-      return rejectWithValue(err.message)
+      toast.error('Error when signing in')
     }
   }
 )
@@ -55,7 +50,7 @@ export const signin = createAsyncThunk(
 // sign in with Google
 export const signInWithGoogle = createAsyncThunk(
   'userSlice/signInWithGoogle',
-  async (_, { rejectWithValue }) => {
+  async (_) => {
     try {
       const resFb = await signInWithPopup(auth, provider)
       const user = resFb.user
@@ -73,7 +68,7 @@ export const signInWithGoogle = createAsyncThunk(
 
       return res.data
     } catch (err) {
-      return rejectWithValue(err.message)
+      toast.error('Error when signing in with Google')
     }
   }
 )
@@ -81,7 +76,7 @@ export const signInWithGoogle = createAsyncThunk(
 // logout
 export const logout = createAsyncThunk(
   'userSlice/logout',
-  async ({ navigate }, { rejectWithValue }) => {
+  async ({ navigate }) => {
     console.log('logout')
     try {
       const res = await axiosInstance.post(
@@ -96,7 +91,7 @@ export const logout = createAsyncThunk(
         navigate('/')
       }
     } catch (err) {
-      return rejectWithValue(err.message)
+      toast.error('Error when signing out')
     }
   }
 )
@@ -104,7 +99,7 @@ export const logout = createAsyncThunk(
 // signup
 export const signup = createAsyncThunk(
   'userSlice/signup',
-  async ({ name, email, password }, { rejectWithValue }) => {
+  async ({ name, email, password }) => {
     try {
       const res = await axiosInstance.post(
         'auth/signup',
@@ -125,7 +120,7 @@ export const signup = createAsyncThunk(
       }
       toast.success('Signed up successfully! You can now sign in.')
     } catch (err) {
-      return rejectWithValue(err.message)
+      toast.error('Error when signing up')
     }
   }
 )
@@ -133,10 +128,7 @@ export const signup = createAsyncThunk(
 // delete user account
 export const deleteAccount = createAsyncThunk(
   'userSlice/deleteAccount',
-  async (
-    { currentUserId, currentPassword, dispatch, navigate },
-    { rejectWithValue }
-  ) => {
+  async ({ currentUserId, currentPassword, dispatch, navigate }) => {
     try {
       const mernResponse = await axiosInstance.delete(
         `users/${currentUserId}`,
@@ -163,7 +155,7 @@ export const deleteAccount = createAsyncThunk(
 // subscribe to a channel
 export const subscribe = createAsyncThunk(
   'userSlice/subscribe',
-  async ({ channelId, currentUser }, { rejectWithValue }) => {
+  async ({ channelId, currentUser }) => {
     try {
       const subUrl = `users/sub/${channelId}`
       const unsubUrl = `users/unsub/${channelId}`
@@ -181,7 +173,7 @@ export const subscribe = createAsyncThunk(
 
       return channelId
     } catch (err) {
-      return rejectWithValue(err.message)
+      toast.error('Error when subscribing')
     }
   }
 )
@@ -189,7 +181,7 @@ export const subscribe = createAsyncThunk(
 // update user info
 export const updateUser = createAsyncThunk(
   'userSlice/updateUser',
-  async ({ currentUser, updateData }, { rejectWithValue }) => {
+  async ({ currentUser, updateData }) => {
     try {
       const promises = []
       const existingEmail = currentUser.email
@@ -231,8 +223,7 @@ export const updateUser = createAsyncThunk(
 
       return res.data
     } catch (err) {
-      toast.error('Error: ', err.messages)
-      return rejectWithValue(err.message)
+      toast.error('Error when trying to update user')
     }
   }
 )
@@ -240,7 +231,7 @@ export const updateUser = createAsyncThunk(
 // update profile image in database
 export const updateUserImg = createAsyncThunk(
   'userSlice/updateUserImg',
-  async ({ currentUserId, downloadURL }, { rejectWithValue }) => {
+  async ({ currentUserId, downloadURL }) => {
     try {
       const res = await axiosInstance.put(
         `users/${currentUserId}`,
@@ -252,7 +243,7 @@ export const updateUserImg = createAsyncThunk(
       console.log('uploadovao')
       return res.data.img
     } catch (err) {
-      return rejectWithValue(err.message)
+      toast.error('Error when trying to update user image')
     }
   }
 )
