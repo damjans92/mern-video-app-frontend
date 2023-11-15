@@ -85,7 +85,7 @@ export const uploadProfileImage = async (
     userEmail: currentUserEmail,
   }
 
-  const uploadTask = uploadBytesResumable(storageRef, file, customMetadata)
+  const uploadTask = uploadBytesResumable(storageRef, file, { customMetadata })
 
   // Listen for state changes, errors, and completion of the upload.
   uploadTask.on(
