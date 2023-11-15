@@ -3,12 +3,7 @@ import styled from 'styled-components'
 import dateFormat from 'dateformat'
 import ActionButtons from './ActionButtons'
 import { useDispatch, useSelector } from 'react-redux'
-import Modal from '../Modal'
-import {
-  toggleEditVideo,
-  toggleOpenUpload,
-} from '../../redux/slices/toggleSlice'
-import EditForm from './EditForm'
+import { toggleOpenUpload } from '../../redux/slices/toggleSlice'
 import { fetchMyVideos } from '../../redux/services/videoService'
 import Spinner from '../UI/Spinner'
 import camera from '../../assets/icons8-video-camera-100.png'

@@ -15,28 +15,6 @@ const Wrapper = styled.div`
   width: 100%;
 `
 
-const UploadButton = styled.button`
-  background-color: #559adb;
-  font-weight: 500;
-  font-size: 16px;
-  width: max-content;
-  color: #292929;
-  border: none;
-  border-radius: 20px;
-  height: max-content;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin: 0 auto;
-`
-const CameraImg = styled.img`
-  margin: 0 auto;
-  width: 150px;
-`
-const TitleUpload = styled.h2`
-  font-weight: normal;
-  color: ${({ theme }) => theme.text};
-  text-align: center;
-`
 const MyVideos = () => {
   useEffect(() => {
     console.log('first')

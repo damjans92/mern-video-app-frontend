@@ -3,6 +3,7 @@ import axiosInstance from '../api'
 import Card from '../components/UI/Card'
 
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 
 const Container = styled.div`
   display: flex;
@@ -40,10 +41,14 @@ const LikedVideos = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axiosInstance.get(`videos/liked`, {
-        withCredentials: true,
-      })
-      setVideos(res.data)
+      try {
+        const res = await axiosInstance.get(`videos/liked`, {
+          withCredentials: true,
+        })
+        setVideos(res.data)
+      } catch (error) {
+        toast.error(error.message)
+      }
     }
     fetchVideos()
   }, [])

@@ -19,8 +19,7 @@ const Container = styled.button`
     css`
       cursor: not-allowed;
       background-color: #838383;
-      /* color: ${({ theme }) => theme.disabledText}; */
-      pointer-events: none; /* Prevent clicks on a disabled button */
+      pointer-events: none;
     `}
 `
 

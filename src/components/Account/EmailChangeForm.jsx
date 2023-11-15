@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Input from '../UI/Input'
 import Button from '../UI/Button'
 import Error from '../UI/Error'
 import { useDispatch } from 'react-redux'
 import { updateUser } from '../../redux/services/userService'
-import { useNavigate } from 'react-router-dom'
 
 const Form = styled.form`
   display: flex;
@@ -25,7 +24,6 @@ const EmailChangeForm = ({ currentUser }) => {
   const [updatedEmail, setUpdatedEmail] = useState(currentUser.email)
   const [errors, setErrors] = useState({})
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const handleEditEmail = async (e) => {
     e.preventDefault()
@@ -33,7 +31,6 @@ const EmailChangeForm = ({ currentUser }) => {
     if (!validateUpdateEmail()) {
       return
     } else {
-      console.log(updatedEmail, currentPassword)
       dispatch(
         updateUser({
           currentUser,

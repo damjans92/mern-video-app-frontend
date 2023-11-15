@@ -2,16 +2,8 @@ import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import Button from '../UI/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage'
 import { toast } from 'react-toastify'
-import app from '../../firebase'
 import profilePic from '../../assets/profile-pic.png'
-import { updateUserImg } from '../../redux/services/userService'
 import ProgressBar from '../Upload/ProgressBar'
 import { uploadProfileImage } from '../../firebase/firebaseStorage'
 
