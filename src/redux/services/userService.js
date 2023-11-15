@@ -51,7 +51,9 @@ export const signin = createAsyncThunk(
 export const signInWithGoogle = createAsyncThunk(
   'userSlice/signInWithGoogle',
   async (_) => {
+    console.log('in GOOGLE thunk')
     try {
+      console.log('in GOOGLE try catch')
       const resFb = await signInWithPopup(auth, provider)
       const user = resFb.user
       const res = await axiosInstance.post(
@@ -68,6 +70,7 @@ export const signInWithGoogle = createAsyncThunk(
 
       return res.data
     } catch (err) {
+      console.log('Google sign in error: ', err.message)
       toast.error('Error when signing in with Google')
     }
   }
