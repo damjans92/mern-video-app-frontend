@@ -32,6 +32,9 @@ export const uploadFile = async (
   const storage = getStorage(app)
   const fileName = new Date().getTime() + file.name
   const storageRef = ref(storage, folder + fileName)
+  const customMetadata = {
+    userEmail: 'customValue',
+  }
 
   const uploadTask = uploadBytesResumable(storageRef, file)
   // Listen for state changes, errors, and completion of the upload.
@@ -72,13 +75,17 @@ export const uploadProfileImage = async (
   file,
   setPercentage,
   currentUserId,
+  currentUserEmail,
   dispatch
 ) => {
   const storage = getStorage(app)
   const fileName = new Date().getTime() + file.name
   const storageRef = ref(storage, 'images/' + fileName)
+  const customMetadata = {
+    userEmail: currentUserEmail,
+  }
 
-  const uploadTask = uploadBytesResumable(storageRef, file)
+  const uploadTask = uploadBytesResumable(storageRef, file, customMetadata)
 
   // Listen for state changes, errors, and completion of the upload.
   uploadTask.on(

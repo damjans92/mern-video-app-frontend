@@ -63,7 +63,13 @@ const ProfileImage = () => {
       toast.error('You have to select an image first')
       return
     }
-    uploadProfileImage(imageToUpload, setImagePerc, currentUser._id, dispatch)
+    uploadProfileImage(
+      imageToUpload,
+      setImagePerc,
+      currentUser._id,
+      currentUser.email,
+      dispatch
+    )
   }
 
   return (
