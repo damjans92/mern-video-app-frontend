@@ -71,7 +71,7 @@ export const signInWithGoogle = createAsyncThunk(
       return res.data
     } catch (err) {
       console.log('Google sign in error: ', err.message)
-      toast.error('Error when signing in with Google')
+      toast.error('Error when signing in with Google: ', err.message)
     }
   }
 )
