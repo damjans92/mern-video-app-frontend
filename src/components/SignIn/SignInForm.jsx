@@ -39,7 +39,7 @@ const SignInForm = () => {
   }
 
   return (
-    <Form>
+    <Form onSubmit={handleLogin}>
       <Title>Sign in</Title>
       <SubTitle>to continue to TubeLand</SubTitle>
       <Input placeholder='username' onChange={(e) => setName(e.target.value)} />
@@ -51,7 +51,7 @@ const SignInForm = () => {
       />
       {errors.password && <Error text={errors.password} />}
       {errors.wrongCredentials && <Error text={errors.wrongCredentials} />}
-      <Button onClick={handleLogin} title='Sign in' disabled={loading} />
+      <Button type='submit' title='Sign in' disabled={loading} />
       <Title>or</Title>
       <Button
         onClick={() => dispatch(signInWithGoogle())}
