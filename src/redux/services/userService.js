@@ -51,9 +51,7 @@ export const signin = createAsyncThunk(
 export const signInWithGoogle = createAsyncThunk(
   'userSlice/signInWithGoogle',
   async (_) => {
-    console.log('in GOOGLE thunk')
     try {
-      console.log('in GOOGLE try catch')
       const resFb = await signInWithPopup(auth, provider)
       const user = resFb.user
       const res = await axiosInstance.post(
@@ -70,7 +68,6 @@ export const signInWithGoogle = createAsyncThunk(
 
       return res.data
     } catch (err) {
-      console.log('Google sign in error: ', err.message)
       toast.error('Error when signing in with Google: ', err.message)
     }
   }
@@ -80,7 +77,6 @@ export const signInWithGoogle = createAsyncThunk(
 export const logout = createAsyncThunk(
   'userSlice/logout',
   async ({ navigate }) => {
-    console.log('logout')
     try {
       const res = await axiosInstance.post(
         `auth/logout`,
@@ -147,7 +143,7 @@ export const deleteAccount = createAsyncThunk(
         dispatch(logout({ navigate }))
         toast.success('Account deleted successfully.')
       } else {
-        toast.error('Error deleting user from MERN database')
+        toast.error('Error deleting user from database')
       }
     } catch (error) {
       toast.error('Error deleting user:', error.message)
@@ -243,7 +239,7 @@ export const updateUserImg = createAsyncThunk(
         },
         { withCredentials: true }
       )
-      console.log('uploadovao')
+
       return res.data.img
     } catch (err) {
       toast.error('Error when trying to update user image')

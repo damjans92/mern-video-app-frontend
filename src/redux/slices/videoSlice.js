@@ -26,7 +26,6 @@ export const videoSlice = createSlice({
     fetchSuccess: (state, action) => {
       state.loading = false
       state.currentVideo = action.payload
-      console.log(action.payload)
     },
     fetchFailure: (state) => {
       state.loading = false
@@ -132,8 +131,6 @@ export const videoSlice = createSlice({
         state.loading = true
       })
       .addCase(deleteVideo.fulfilled, (state, action) => {
-        console.log('delete')
-        console.log(action.payload)
         state.videoList = state.videoList.filter(
           (video) => video._id !== action.payload
         )

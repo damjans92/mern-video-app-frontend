@@ -46,7 +46,6 @@ export const deleteVideo = createAsyncThunk(
   'videoSlice/deleteVideo',
   async ({ videoId, imgUrl, videoUrl }) => {
     try {
-      console.log('delete service')
       const videoFileUrl = videoUrl
       const imageFileUrl = imgUrl
       // Delete the file
@@ -58,7 +57,6 @@ export const deleteVideo = createAsyncThunk(
           const res = await axiosInstance.delete(`videos/${videoId}`, {
             withCredentials: true,
           })
-          console.log(res.data)
 
           toast.success('Video deleted successfully!')
         })

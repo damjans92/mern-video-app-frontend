@@ -33,19 +33,15 @@ export const userSlice = createSlice({
         state.error = false
       })
       .addCase(signin.rejected, (state, action) => {
-        console.log(action)
         state.loading = false
         state.error = action.payload
       })
 
       // sign in with Google
       .addCase(signInWithGoogle.pending, (state) => {
-        console.log('signin pedning')
         state.loading = true
       })
       .addCase(signInWithGoogle.fulfilled, (state, action) => {
-        console.log('payload')
-        console.log(action.payload)
         state.loading = false
         state.currentUser = action.payload
         state.error = false
@@ -105,7 +101,6 @@ export const userSlice = createSlice({
         state.loading = true
       })
       .addCase(updateUser.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false
         state.currentUser = action.payload
         state.error = false
@@ -120,7 +115,6 @@ export const userSlice = createSlice({
         state.loading = true
       })
       .addCase(deleteAccount.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false
         state.currentUser = null
         state.error = false
@@ -135,7 +129,6 @@ export const userSlice = createSlice({
         state.loading = true
       })
       .addCase(updateUserImg.fulfilled, (state, action) => {
-        console.log(action.payload)
         state.loading = false
         state.currentUser.img = action.payload
         state.error = false
