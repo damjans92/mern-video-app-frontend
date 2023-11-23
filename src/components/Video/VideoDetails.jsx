@@ -39,22 +39,27 @@ const VideoDetails = () => {
   const handleDislike = async () => {
     if (!currentUser) {
       navigate('/signin')
+    } else {
+      dispatch(
+        dislike({
+          currentUserId: currentUser._id,
+          currentVideoId: currentVideo._id,
+        })
+      )
     }
-    dispatch(
-      dislike({
-        currentUserId: currentUser._id,
-        currentVideoId: currentVideo._id,
-      })
-    )
   }
 
   const handleLike = async () => {
     if (!currentUser) {
       navigate('/signin')
+    } else {
+      dispatch(
+        like({
+          currentUserId: currentUser._id,
+          currentVideoId: currentVideo._id,
+        })
+      )
     }
-    dispatch(
-      like({ currentUserId: currentUser._id, currentVideoId: currentVideo._id })
-    )
   }
 
   return (

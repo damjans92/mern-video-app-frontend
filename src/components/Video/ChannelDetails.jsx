@@ -86,8 +86,9 @@ const ChannelDetails = () => {
   const handleSubscribe = async () => {
     if (!currentUser) {
       navigate('/signin')
+    } else {
+      dispatch(subscribe({ channelId: channel._id, currentUser }))
     }
-    dispatch(subscribe({ channelId: channel._id, currentUser }))
   }
 
   return (
