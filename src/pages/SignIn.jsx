@@ -12,7 +12,6 @@ const Container = styled.div`
   flex-direction: column;
   color: ${({ theme }) => theme.text};
 `
-
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -21,21 +20,6 @@ const Wrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.soft};
   padding: 20px 50px;
   gap: 10px;
-`
-const Title = styled.h1`
-  font-size: 24px;
-`
-const SubTitle = styled.h2`
-  font-size: 20px;
-  font-weight: 300;
-`
-const Input = styled.input`
-  border: 1px solid ${({ theme }) => theme.soft};
-  border-radius: 3px;
-  padding: 10px;
-  background-color: transparent;
-  width: 100%;
-  color: ${({ theme }) => theme.text};
 `
 const More = styled.div`
   display: flex;

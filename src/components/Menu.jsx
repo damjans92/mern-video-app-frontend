@@ -5,7 +5,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined'
 import SubscriptionsOutlinedIcon from '@mui/icons-material/SubscriptionsOutlined'
 import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import MenuIcon from '@mui/icons-material/Menu'
 import { toggleDarkMode, toggleNavMobile } from '../redux/slices/toggleSlice'
@@ -76,26 +76,6 @@ const MenuButton = styled.div`
     display: none;
   }
 `
-const NavLinkStyled = styled(NavLink)`
-  display: inline-block;
-  width: 100%;
-  transition: 0.2s;
-  border-radius: 12px;
-  padding: 3px 0;
-  &:hover {
-    background-color: ${({ theme }) => theme.navActiveBg};
-  }
-  &.active {
-    background-color: ${({ theme }) => theme.navActiveBg};
-  }
-  &.active:hover {
-    background-color: ${({ theme }) => theme.navActiveBgHover};
-  }
-  &:focus {
-    background-color: ${({ theme }) => theme.navActiveBgHover};
-  }
-`
-
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
@@ -110,7 +90,12 @@ const Overlay = styled.div`
     visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
   }
 `
-
+const Copy = styled.div`
+  display: flex;
+  margin-top: 10px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.textSoft};
+`
 const Menu = () => {
   const { currentUser } = useSelector((state) => state.user)
   const { darkMode } = useSelector((state) => state.toggle)
@@ -163,6 +148,7 @@ const Menu = () => {
             <SettingsBrightnessOutlinedIcon />
             {darkMode ? 'Light' : 'Dark'} Mode
           </Item>
+          <Copy>&copy; {new Date().getFullYear()} TubeLand</Copy>
         </Wrapper>
       </Container>
     </div>
