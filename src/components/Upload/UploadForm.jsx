@@ -94,11 +94,12 @@ const UploadForm = ({ setOpen }) => {
   }
 
   const handleTags = (e) => {
-    setTags(e.target.value.split(','))
+    const tags = e.target.value.split(',')
+    const tagsTrimmed = tags.map((word) => word.trim())
+    setTags(tagsTrimmed)
   }
 
   useEffect(() => {
-    //inputs.video && uploadFile(inputs.video, 'videoUrl', 'videos/')
     inputs.video &&
       uploadFile(inputs.video, 'videoUrl', 'videos/', setVideoPer, setInputs)
   }, [inputs.video])

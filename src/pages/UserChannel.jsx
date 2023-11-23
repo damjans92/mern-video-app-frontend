@@ -8,7 +8,6 @@ import Tabs from '../components/Tabs/Tabs'
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   flex-direction: column;
 `
 const ChannelImage = styled.div`

@@ -17,6 +17,7 @@ const Container = styled.div`
 const Main = styled.div`
   flex: 7;
   background-color: ${({ theme }) => theme.bg};
+  overflow-x: hidden;
 `
 const Wrapper = styled.div`
   padding: 52px 30px;

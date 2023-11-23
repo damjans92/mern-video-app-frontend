@@ -114,7 +114,7 @@ export const signup = createAsyncThunk(
         try {
           const user = await signUpWithFirebase(email, password)
         } catch (firebaseError) {
-          toast.error(firebaseError.message)
+          toast.error('Firebase error: ', firebaseError.message)
         }
       }
       toast.success('Signed up successfully! You can now sign in.')

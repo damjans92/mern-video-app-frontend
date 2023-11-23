@@ -37,7 +37,8 @@ const SignUpForm = () => {
   const { loadingSignup } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault()
     const fields = {
       name,
       password,
@@ -55,7 +56,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <Form>
+    <Form onSubmit={handleSignUp}>
       <Title>Sign up</Title>
       <label htmlFor='username' hidden>
         Username
@@ -101,7 +102,7 @@ const SignUpForm = () => {
         I accept <Link to='/terms-and-conditions'>terms and conditions</Link>
       </TermsLabel>
       {errors.acceptTerms && <Error text={errors.acceptTerms} />}
-      <Button onClick={handleSignUp} title='Sign up' disabled={loadingSignup} />
+      <Button type='submit' title='Sign up' disabled={loadingSignup} />
     </Form>
   )
 }
