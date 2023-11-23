@@ -7,6 +7,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined'
 import ThumbDownIcon from '@mui/icons-material/ThumbDown'
 import { dislike, like } from '../../redux/services/videoService'
+import { useNavigate } from 'react-router-dom'
 
 const Details = styled.div`
   display: flex;
@@ -33,8 +34,12 @@ const VideoDetails = () => {
   const { currentUser } = useSelector((state) => state.user)
   const { currentVideo, loading, error } = useSelector((state) => state.video)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleDislike = async () => {
+    if (!currentUser) {
+      navigate('/signin')
+    }
     dispatch(
       dislike({
         currentUserId: currentUser._id,
@@ -44,6 +49,9 @@ const VideoDetails = () => {
   }
 
   const handleLike = async () => {
+    if (!currentUser) {
+      navigate('/signin')
+    }
     dispatch(
       like({ currentUserId: currentUser._id, currentVideoId: currentVideo._id })
     )

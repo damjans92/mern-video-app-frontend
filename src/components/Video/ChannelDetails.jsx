@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   fetchFailure,
@@ -60,6 +60,7 @@ const ChannelDetails = () => {
   const [channel, setChannel] = useState({})
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const path = useLocation().pathname.split('/')[2]
   const videoId = useParams().id
 
@@ -83,8 +84,12 @@ const ChannelDetails = () => {
   }, [path, videoId, dispatch])
 
   const handleSubscribe = async () => {
+    if (!currentUser) {
+      navigate('/signin')
+    }
     dispatch(subscribe({ channelId: channel._id, currentUser }))
   }
+
   return (
     <Channel>
       <ChannelInfo>
