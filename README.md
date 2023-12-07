@@ -13,9 +13,9 @@ This app resembles some Youtube functionalities and visual layout.
 Live [DEMO](https://tubeland.onrender.com/)
 
 ### Built With
-MERN stack
+MERN stack  
 Frontend - React (Vite), Redux Toolkit, Styled components  
-Backend - Node.js, Express.js, MongoDB(Atlas), JWT, Cookies 
+[Backend](https://github.com/damjans92/mern-video-app-backend) - Node.js, Express.js, MongoDB(Atlas), JWT, Cookies 
 
 ## Features
 Non-registered users can only watch videos.  
