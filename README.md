@@ -15,7 +15,7 @@ Live [DEMO](https://tubeland.onrender.com/)
 ### Built With
 MERN stack  
 Frontend - React (Vite), Redux Toolkit, Styled components  
-[Backend](https://github.com/damjans92/mern-video-app-backend) - Node.js, Express.js, MongoDB(Atlas), JWT, Cookies 
+[Backend](https://github.com/damjans92/mern-video-app-backend) - Node.js, Express.js, MongoDB(Atlas), JWT, Cookies   
 Firebase - used for storage and additional authentication
 
 ## Features
