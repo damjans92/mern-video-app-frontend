@@ -57,7 +57,7 @@ const LikedVideos = () => {
     <Container>
       <H1>Liked Videos</H1>
       <Wrapper>
-        {videos.length > 0 ? (
+        {videos && videos.length > 0 ? (
           videos.map((video, index) => (
             <Row key={video._id}>
               <Number>{index + 1}</Number>
