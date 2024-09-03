@@ -127,11 +127,11 @@ const MyVideosTable = () => {
     dispatch(fetchMyVideos())
   }, [dispatch])
 
-  if (loading && videoList.length > 0) {
+  if (loading && videoList && videoList.length > 0) {
     return <Spinner />
   }
 
-  if (!loading && videoList.length == 0) {
+  if (!loading && videoList && videoList.length == 0) {
     return (
       <>
         <CameraImg src={camera} width='100' />
@@ -143,7 +143,7 @@ const MyVideosTable = () => {
     )
   }
 
-  if (!loading && videoList.length > 0) {
+  if (!loading && videoList && videoList.length > 0) {
     return (
       <>
         <TableContainer>
